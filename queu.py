@@ -27,3 +27,8 @@ class queue:
             self.tail = None
         return removed_node.user
  
+ def displayNodes(self):
+    current = self.head
+    while current != None:
+      print(current.user)
+      current = current.next
