@@ -49,3 +49,12 @@ class Graph:                #the graph probably is spare that's why an adjacency
       print("Invalid vertex", vertex1, "\n")
     else:
       print("Invalid vertex", vertex2, "\n")
+
+  def displayGraph(self):
+    if self.adj_list == {}:
+      print("Graph is empty!\n")
+      return
+    for vertex in self.adj_list:
+      print(vertex + ":", end=" ")
+      self.adj_list[vertex].displayNodes()
+    print()
