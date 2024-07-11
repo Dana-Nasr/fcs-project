@@ -17,3 +17,9 @@ class Stack:
       self.head = self.head.next
       current.next = None
       self.size -= 1
+  
+  def peek(self):
+    if self.size == 0:
+      print("Cannot peek from an empty stack! Push first...\n")
+    else:
+      print("\nThe top node has the value of:", self.head.user, "\n")
