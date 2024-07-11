@@ -1,3 +1,6 @@
+from node import Node
+node=Node()
+
 class LinkedList:
 
    def __init__(self):
@@ -5,10 +8,10 @@ class LinkedList:
     self.size = 0
   
    def addNode(self, data,weight):
-    new_node = Node(data,weight)
-    new_node.next = self.head
-    self.head = new_node
-    self.size += 1
+      new_node = node(data,weight)
+      new_node.next = self.head
+      self.head = new_node
+      self.size += 1
 
    def removeNode(self, data):
         temp = self.head
