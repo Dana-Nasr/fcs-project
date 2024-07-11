@@ -3,9 +3,17 @@ class Stack:
     self.head = None
     self.size = 0
   def push(self, node):
-    
     print("We are pushing:", node.user, "\n")
-
     node.next = self.head
     self.head = node
     self.size += 1
+
+  def pop(self):
+    if self.size == 0:
+      print("Cannot pop from an empty stack! Push first...\n")
+    else:
+      print("We are removing:", self.head.user)
+      current = self.head
+      self.head = self.head.next
+      current.next = None
+      self.size -= 1
