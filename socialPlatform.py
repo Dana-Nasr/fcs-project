@@ -1,5 +1,6 @@
 from node import Node
 from stack import Stack
+from queu import Queue
 node=Node()
 
 class LinkedList:
@@ -104,4 +105,22 @@ class Graph:                #the graph probably is spare that's why an adjacency
                 while current:
                     if current.user not in visited:
                         stack.push(current.user)
+                    current = current.next
+
+  def bfs(self, start_vertex):
+        if start_vertex not in self.adj_list:
+            print(f"Start vertex {start_vertex} not found in the graph")
+            return
+        visited = set()
+        queue = Queue()
+        queue.inqueue(start_vertex)
+        while queue.head is not None:
+            vertex = queue.dequeue()
+            if vertex not in visited:
+                print("Visited:", vertex)
+                visited.add(vertex)
+                current = self.adj_list[vertex].head
+                while current:
+                    if current.user not in visited:
+                        queue.inqueue(current.user)
                     current = current.next
