@@ -5,3 +5,11 @@ def main():
     user2 = User(2, "Salam", ["History"], {"interested_in_topics": ["Math"], "already_known_topics": ["Ancient History"]})
     user3 = User(3, "Fadi", ["Computer Science", "Physics"], {"interested_in_topics": ["Algebra"], "already_known_topics": ["Gravity"]})
     
+    graph = Graph()
+    graph.addVertex(user1)
+    graph.addVertex(user2)
+    graph.addVertex(user3)
+
+  
+
+

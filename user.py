@@ -35,9 +35,12 @@ class User:
     def deleteKnownTopic(self, topic):
         if 'already_known_topics' in self.topics and topic in self.topics['already_known_topics']:
             self.topics['already_known_topics'].remove(topic)
-            
+
     def deleteUser(users, user_id):
         for user in users:
          if user.id == user_id:
             users.remove(user)
             break
+         
+    def getSubjects(self):
+        return self.subjects
