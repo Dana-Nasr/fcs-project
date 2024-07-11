@@ -23,3 +23,6 @@ class Stack:
       print("Cannot peek from an empty stack! Push first...\n")
     else:
       print("\nThe top node has the value of:", self.head.user, "\n")
+
+  def isEmpty(self):
+    return self.size == 0
