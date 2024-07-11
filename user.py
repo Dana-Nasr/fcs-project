@@ -21,3 +21,8 @@ class User:
             self.topics['already_known_topics'] = []
         if topic not in self.topics['already_known_topics']:
             self.topics['already_known_topics'].append(topic)   
+    def printUser():
+        print("id={self.id}, name={self.name}, subjects={self.subjects}, topics={self.topics}")
+
+
+        
