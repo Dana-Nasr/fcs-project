@@ -29,7 +29,7 @@ class Graph:                #the graph probably is spare that's why an adjacency
     print("Vertex", vertex, "already exists!\n")
 
   def addFreindEdge(self, vertex1, vertex2,weight):
-    if vertex1 in self.adj_list and vertex2 in self.adj_list:    #undirected to serve as friends
+    if vertex1 in self.adj_list and vertex2 in self.adj_list:    #undirected to serve as friends weight determine how much they are friends
       self.adj_list[vertex1].addNode(vertex2,weight)
       self.adj_list[vertex2].addNode(vertex1,weight)
     elif vertex1 not in self.adj_list and vertex2 not in self.adj_list:
@@ -39,3 +39,13 @@ class Graph:                #the graph probably is spare that's why an adjacency
     else:
       print("Invalid vertex", vertex2, "\n")
   
+  def addfollowEdge(self, vertex1, vertex2,weight=0):
+    if vertex1 in self.adj_list and vertex2 in self.adj_list:    #directed to serve as follow weight=0 
+      self.adj_list[vertex1].addNode(vertex2,weight)
+
+    elif vertex1 not in self.adj_list and vertex2 not in self.adj_list:
+      print("Invalid vertices", vertex1, "and", vertex2, "\n")
+    elif vertex1 not in self.adj_list:
+      print("Invalid vertex", vertex1, "\n")
+    else:
+      print("Invalid vertex", vertex2, "\n")
