@@ -9,3 +9,10 @@ class queue:
       size += 1
       current = current.next
     return size
+ def inqueue(self, node):
+    if self.head == None:
+      self.head = node
+      self.tail = node
+    else:
+      self.tail.next = node
+      self.tail = node          #repositioning tail
