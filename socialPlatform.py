@@ -64,6 +64,16 @@ class Graph:                #the graph probably is spare that's why an adjacency
       print("Invalid vertex", vertex1, "\n")
     else:
       print("Invalid vertex", vertex2, "\n")
+  
+  def deleteVertex(self, vertex):
+        if vertex not in self.adj_list:
+            print("Vertex", vertex, "does not exist!\n")
+            return
+        del self.adj_list[vertex]
+        for v in self.adj_list:
+            self.adj_list[v].removeNode(vertex)      #deletes any connection (edge) to the vertex
+
+        print("Vertex", vertex, "has been deleted!\n")
 
   def displayGraph(self):
     if self.adj_list == {}:
