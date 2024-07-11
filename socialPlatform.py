@@ -1,4 +1,5 @@
 from node import Node
+from stack import Stack
 node=Node()
 
 class LinkedList:
@@ -86,3 +87,21 @@ class Graph:                #the graph probably is spare that's why an adjacency
       print(vertex + ":", end=" ")
       self.adj_list[vertex].displayNodes()
     print()
+
+  def dfs(self, start_vertex):
+        if start_vertex not in self.adj_list:
+            print(f"Start vertex {start_vertex} not found in the graph")
+            return
+        visited = set()                  #do not need to be ordered
+        stack = Stack()
+        stack.push(start_vertex)
+        while not stack.isEmpty():
+            vertex = stack.pop()
+            if vertex not in visited:
+                print("Visited:", vertex)
+                visited.add(vertex)
+                current = self.adj_list[vertex].head
+                while current:
+                    if current.user not in visited:
+                        stack.push(current.user)
+                    current = current.next
