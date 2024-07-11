@@ -25,3 +25,5 @@ class User:
         print(f"id={self.id}, name={self.name}, subjects={self.subjects}, topics={self.topics}")  #f to evaluate inside the {}
 
 
+    def changeName(self, new_name):
+        self.name = new_name
