@@ -16,3 +16,14 @@ class queue:
     else:
       self.tail.next = node
       self.tail = node          #repositioning tail
+
+ def dequeue(self):
+        if self.head is None:
+            print("Queue is empty")
+            return None
+        removed_node = self.head
+        self.head = self.head.next
+        if self.head is None:       #queue is empty now
+            self.tail = None
+        return removed_node.user
+ 
