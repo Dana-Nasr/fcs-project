@@ -27,7 +27,11 @@ class User:
 
     def changeName(self, new_name):
         self.name = new_name
-        
+
     def deleteInterestedTopic(self, topic):
         if 'interested_in_topics' in self.topics and topic in self.topics['interested_in_topics']:
             self.topics['interested_in_topics'].remove(topic)
+
+    def deleteKnownTopic(self, topic):
+        if 'already_known_topics' in self.topics and topic in self.topics['already_known_topics']:
+            self.topics['already_known_topics'].remove(topic)
