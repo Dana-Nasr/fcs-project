@@ -10,6 +10,21 @@ class LinkedList:
     self.head = new_node
     self.size += 1
 
+   def removeNode(self, data):
+        temp = self.head
+        prev = None
+        while temp:
+            if temp.data == data:
+                if prev:
+                    prev.next = temp.next
+                else:
+                    self.head = temp.next
+                self.size -= 1
+                return True
+            prev = temp
+            temp = temp.next
+        return False
+
    def displayNodes(self):
     temp = self.head
     while temp:
