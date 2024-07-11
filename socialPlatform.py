@@ -18,4 +18,6 @@ class LinkedList:
     print("None")
 
 class Graph:
+  def __init__(self):
+    self.adj_list = {}
   
