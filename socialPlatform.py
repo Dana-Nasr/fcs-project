@@ -27,4 +27,15 @@ class Graph:                #the graph probably is spare that's why an adjacency
       print("Vertex", vertex, "has been added!\n")
       return
     print("Vertex", vertex, "already exists!\n")
+
+  def addFreindEdge(self, vertex1, vertex2,weight):
+    if vertex1 in self.adj_list and vertex2 in self.adj_list:    #undirected to serve as friends
+      self.adj_list[vertex1].addNode(vertex2,weight)
+      self.adj_list[vertex2].addNode(vertex1,weight)
+    elif vertex1 not in self.adj_list and vertex2 not in self.adj_list:
+      print("Invalid vertices", vertex1, "and", vertex2, "\n")
+    elif vertex1 not in self.adj_list:
+      print("Invalid vertex", vertex1, "\n")
+    else:
+      print("Invalid vertex", vertex2, "\n")
   
