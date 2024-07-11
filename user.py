@@ -9,4 +9,15 @@ class User:
         if subject not in self.subjects:
             self.subjects.append(subject)
 
-    
+    def addInterestedTopic(self, topic):                ##key 1 in dict
+        if 'interested_in_topics' not in self.topics:
+            self.topics['interested_in_topics'] = []
+        if topic not in self.topics['interested_in_topics']:
+            self.topics['interested_in_topics'].append(topic)
+
+
+    def addKnowntTopic(self, topic):                    ##key 2 in dict
+        if 'already_known_topics' not in self.topics:
+            self.topics['already_known_topics'] = []
+        if topic not in self.topics['already_known_topics']:
+            self.topics['already_known_topics'].append(topic)   
