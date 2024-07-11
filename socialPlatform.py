@@ -17,7 +17,14 @@ class LinkedList:
       temp = temp.next
     print("None")
 
-class Graph:
+class Graph:                #the graph probably is spare that's why an adjacency list is used
   def __init__(self):
     self.adj_list = {}
+
+  def addVertex(self, vertex):
+    if vertex not in self.adj_list:
+      self.adj_list[vertex] = LinkedList()      #add a node to the linked list
+      print("Vertex", vertex, "has been added!\n")
+      return
+    print("Vertex", vertex, "already exists!\n")
   
