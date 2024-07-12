@@ -1,7 +1,7 @@
 from node import Node
 from stack import Stack
 from queu import Queue
-from user import User  # Ensure User class is imported
+from user import User 
 
 class LinkedList:
     def __init__(self):
@@ -39,7 +39,7 @@ class LinkedList:
 class Graph:
     def __init__(self):
         self.adj_list = {}
-        self.users = {}  # Store user information keyed by user_id
+        self.users = {}  # dict to store user info
 
     def addUser(self, user):
         if user.id in self.adj_list:
@@ -53,7 +53,7 @@ class Graph:
         
         print(f"User {user.name} with ID {user.id} has been added to the graph!\n")
 
-    def addFriendEdge(self, user1_id, user2_id, weight):
+    def addFriendEdge(self, user1_id, user2_id, weight):                 #undirected for friends
         if user1_id in self.adj_list and user2_id in self.adj_list:
             node1 = Node(self.users[user1_id], weight)
             node2 = Node(self.users[user2_id], weight)
@@ -63,7 +63,7 @@ class Graph:
         else:
             print(f"Invalid user IDs {user1_id} and {user2_id}!\n")
 
-    def addFollowEdge(self, user1_id, user2_id, weight=0):
+    def addFollowEdge(self, user1_id, user2_id, weight=0):                    #directed for follow
         if user1_id in self.adj_list and user2_id in self.adj_list:
             node = Node(self.users[user2_id], weight)
             self.adj_list[user1_id].addNode(node)
@@ -182,7 +182,7 @@ class Graph:
             other_user_subjects = set(other_user.subjects)
             other_user_topics = set(other_user.topics.get('interested_in_topics', []))
 
-            common_subjects = user_subjects.intersection(other_user_subjects)   #finding comom elements
+            common_subjects = user_subjects.intersection(other_user_subjects)   #finding comom elements in the 2 sets
             common_topics = user_topics.intersection(other_user_topics)
 
             common_interests_count = len(common_subjects) + len(common_topics)

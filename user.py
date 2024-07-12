@@ -22,7 +22,7 @@ class User:
             self.topics['already_known_topics'].append(topic)
 
     def printUser(self):
-        print(f"id={self.id}, name={self.name}, subjects={self.subjects}, topics={self.topics}")
+        print(f"\n id={self.id}\n name={self.name}\n subjects={self.subjects}\n topics={self.topics}\n \n")
 
     def changeName(self, new_name):
         self.name = new_name
