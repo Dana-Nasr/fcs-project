@@ -5,56 +5,34 @@ from stack import Stack
 from queu import Queue
   
 def main():
-    # Create Users
-    user1 = User(1, "sara", ["Math", "Science"], {})
-    user2 = User(2, "heba", ["History", "Art"], {})
-    user3 = User(3, "fadi", ["Math", "Art"], {})
-    user4 = User(4, "dalal", ["Science", "History"], {})
-
-    # Print Users
-    user1.printUser()
-    user2.printUser()
-    user3.printUser()
-    user4.printUser()
-
-    # Modify Users
-    user1.addSubject("Physics")
-    user2.addInterestedTopic(" Mechanics")
-    user3.addKnownTopic(" Art")
-    user4.changeName("david nasr")
-
-    # Print Modified Users
-    user1.printUser()
-    user2.printUser()
-    user3.printUser()
-    user4.printUser()
-
-    # Create Graph
+    # Initialize a graph
     graph = Graph()
-
-    # Add vertices
-    graph.addVertex("sara")
-    graph.addVertex("heba")
-    graph.addVertex("fadi")
-    graph.addVertex("david")
-
-    # Add edges
-    graph.addFriendEdge("sara", "heba", 5)
-    graph.addFriendEdge("fadi", "sara", 3)
-    graph.addFollowEdge("david", "sara")
-
-    # Display Graph
-    graph.displayGraph()
-
-    # DFS Traversal
-    print("DFS Traversal from sara:")
-    graph.dfs("sara")
-
-    # BFS Traversal
-    print("BFS Traversal from sara:")
-    graph.bfs("sara")
-
     
-
+    # Add users
+    graph.addUser(1, "Alice", subjects=['Math', 'Science'], topics={})
+    graph.addUser(2, "Bob", subjects=['History', 'Art'], topics={})
+    graph.addUser(3, "Charlie", subjects=['Math', 'Art'], topics={})
+    graph.addUser(4, "Diana Smith", subjects=['Science', 'History'], topics={})
+    
+    # Display the initial graph
+    print("Initial Graph:")
+    graph.displayGraph()
+    
+    # Add relationships (edges)
+    graph.addFriendEdge(1, 2,4)
+    graph.addFriendEdge(2, 4,7)
+    graph.addFollowEdge(1, 3,5)
+    
+    # Display the updated graph
+    print("Updated Graph with Relationships:")
+    graph.displayGraph()
+    
+    # Perform DFS from Alice (vertex 1)
+    print("DFS Traversal from Alice (vertex 1):")
+    graph.dfs(1)
+    
+    # Perform BFS from Alice (vertex 1)
+    print("BFS Traversal from Alice (vertex 1):")
+    graph.bfs(1)
 
 main()
