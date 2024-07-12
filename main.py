@@ -16,19 +16,19 @@ def main():
     print("Initial Graph:")
     graph.displayGraph()
   
-     # Adding edges
+  
     graph.addFriendEdge(1, 2, 4)
     graph.addFriendEdge(1, 3, 2)
     graph.addFriendEdge(2, 4, 1)
 
-    # Display graph
+  
     graph.displayGraph()
 
-    # Friend recommendations
+
     graph.recommendFriends(1)
 
-    # Traversals
-    print("DFS Traversal from Alice (vertex 1):")
+   
+    print("DFS Traversal from sara (vertex 1):")
     graph.dfs(1)
     
     

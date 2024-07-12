@@ -1,6 +1,7 @@
 from node import Node
 from stack import Stack
 from queue import Queue
+from user import User  # Ensure User class is imported
 
 class LinkedList:
     def __init__(self):
@@ -13,11 +14,11 @@ class LinkedList:
         self.head = new_node
         self.size += 1
 
-    def removeNode(self, data):
+    def removeNode(self, user_id):
         temp = self.head
         prev = None
         while temp:
-            if temp.user == data:
+            if temp.user.id == user_id:
                 if prev:
                     prev.next = temp.next
                 else:
@@ -31,7 +32,7 @@ class LinkedList:
     def displayNodes(self):
         temp = self.head
         while temp:
-            print(temp.user, end=" -> ")
+            print(temp.user.id, end=" -> ")
             temp = temp.next
         print("None")
 
@@ -40,97 +41,92 @@ class Graph:
         self.adj_list = {}
         self.users = {}  # Store user information keyed by user_id
 
-    def addUser(self, user_id, name, subjects=None, topics=None):
-        if user_id in self.adj_list:
-            print(f"User with ID {user_id} already exists in the graph!\n")
+    def addUser(self, user):
+        if user.id in self.adj_list:
+            print(f"User with ID {user.id} already exists in the graph!\n")
             return
         
-        new_node = Node(user_id, name)  # creating a user
-        if subjects:
-            new_node.subjects = subjects
-        if topics:
-            new_node.topics = topics
-
-        self.adj_list[user_id] = LinkedList()
-        self.adj_list[user_id].addNode(new_node)
-        self.users[user_id] = new_node
+        new_node = Node(user)
+        self.adj_list[user.id] = LinkedList()
+        self.adj_list[user.id].addNode(new_node)
+        self.users[user.id] = user
         
-        print(f"User {name} with ID {user_id} has been added to the graph!\n")
+        print(f"User {user.name} with ID {user.id} has been added to the graph!\n")
 
-    def addFriendEdge(self, vertex1, vertex2, weight):
-        if vertex1 in self.adj_list and vertex2 in self.adj_list:
-            node1 = Node(vertex1, weight)
-            node2 = Node(vertex2, weight)
-            self.adj_list[vertex1].addNode(node2)  # not directed to show they are friends
-            self.adj_list[vertex2].addNode(node1)
+    def addFriendEdge(self, user1_id, user2_id, weight):
+        if user1_id in self.adj_list and user2_id in self.adj_list:
+            node1 = Node(self.users[user1_id], weight)
+            node2 = Node(self.users[user2_id], weight)
+            self.adj_list[user1_id].addNode(node2)
+            self.adj_list[user2_id].addNode(node1)
         else:
-            print(f"Invalid vertices {vertex1} and {vertex2}!\n")
+            print(f"Invalid user IDs {user1_id} and {user2_id}!\n")
 
-    def addFollowEdge(self, vertex1, vertex2, weight=0):  # directed indicates follow
-        if vertex1 in self.adj_list and vertex2 in self.adj_list:
-            node = Node(vertex2, weight)
-            self.adj_list[vertex1].addNode(node)
+    def addFollowEdge(self, follower_id, followee_id, weight=0):
+        if follower_id in self.adj_list and followee_id in self.adj_list:
+            node = Node(self.users[followee_id], weight)
+            self.adj_list[follower_id].addNode(node)
         else:
-            print(f"Invalid vertices {vertex1} and {vertex2}!\n")
+            print(f"Invalid user IDs {follower_id} and {followee_id}!\n")
 
-    def deleteVertex(self, vertex):
-        if vertex not in self.adj_list:
-            print(f"Vertex {vertex} does not exist!\n")
+    def deleteUser(self, user_id):
+        if user_id not in self.adj_list:
+            print(f"User ID {user_id} does not exist!\n")
             return
-        del self.adj_list[vertex]
+        del self.adj_list[user_id]
         for v in self.adj_list:
-            self.adj_list[v].removeNode(vertex)
-        print(f"Vertex {vertex} has been deleted!\n")
+            self.adj_list[v].removeNode(user_id)
+        print(f"User ID {user_id} has been deleted!\n")
 
     def displayGraph(self):
         if not self.adj_list:
             print("Graph is empty!\n")
             return
-        for vertex in self.adj_list:
-            print(f"{vertex}:", end=" ")
-            self.adj_list[vertex].displayNodes()
+        for user_id in self.adj_list:
+            print(f"{user_id}:", end=" ")
+            self.adj_list[user_id].displayNodes()
         print()
 
-    def dfs(self, start_vertex):
-        if start_vertex not in self.adj_list:
-            print(f"Start vertex {start_vertex} not found in the graph")
+    def dfs(self, start_user_id):
+        if start_user_id not in self.adj_list:
+            print(f"Start user ID {start_user_id} not found in the graph")
             return
         
         visited = set()
         stack = Stack()
-        stack.push(Node(start_vertex, 0))
+        stack.push(Node(self.users[start_user_id]))
         
         while not stack.isEmpty():
             vertex_node = stack.pop()
-            vertex = vertex_node.user
+            vertex = vertex_node.user.id
             if vertex not in visited:
                 print("Visited:", vertex)
                 visited.add(vertex)
                 current = self.adj_list[vertex].head
                 while current:
-                    if current.user not in visited:
-                        stack.push(Node(current.user, 0))  # push the adj 
+                    if current.user.id not in visited:
+                        stack.push(Node(current.user))
                     current = current.next
 
-    def bfs(self, start_vertex):
-        if start_vertex not in self.adj_list:
-            print(f"Start vertex {start_vertex} not found in the graph")
+    def bfs(self, start_user_id):
+        if start_user_id not in self.adj_list:
+            print(f"Start user ID {start_user_id} not found in the graph")
             return
         
         visited = set()
         queue = Queue()
-        queue.inqueue(Node(start_vertex, 0))
+        queue.inqueue(Node(self.users[start_user_id]))
         
         while queue.head is not None:
             vertex_node = queue.dequeue()
-            vertex = vertex_node.user
+            vertex = vertex_node.user.id
             if vertex not in visited:
                 print("Visited:", vertex)
                 visited.add(vertex)
                 current = self.adj_list[vertex].head
                 while current:
-                    if current.user not in visited:
-                        queue.inqueue(Node(current.user, 0))  # inqueue adj
+                    if current.user.id not in visited:
+                        queue.inqueue(Node(current.user))
                     current = current.next
 
     def recommendFriends(self, user_id):
@@ -150,7 +146,7 @@ class Graph:
             other_user_subjects = set(other_user.subjects)
             other_user_topics = set(other_user.topics.get('interested_in_topics', []))
 
-            common_subjects = user_subjects.intersection(other_user_subjects)
+            common_subjects = user_subjects.intersection(other_user_subjects)   #finding comom elements
             common_topics = user_topics.intersection(other_user_topics)
 
             common_interests_count = len(common_subjects) + len(common_topics)
@@ -158,7 +154,7 @@ class Graph:
             if common_interests_count > 0:
                 recommendations.append((common_interests_count, other_user_id))
 
-        recommendations.sort(reverse=True, key=lambda x: x[0])
+       
 
         print(f"Friend recommendations for user {user_id}:")
         for count, friend_id in recommendations:

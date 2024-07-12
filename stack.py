@@ -4,7 +4,6 @@ class Stack:
         self.size = 0
 
     def push(self, node):
-        print("We are pushing:", node.user, "\n")
         node.next = self.head
         self.head = node
         self.size += 1
@@ -14,7 +13,6 @@ class Stack:
             print("Cannot pop from an empty stack! Push first...\n")
             return None
         else:
-            print("We are removing:", self.head.user)
             current = self.head
             self.head = self.head.next
             current.next = None
