@@ -1,7 +1,8 @@
 from node import Node
 from stack import Stack
 from queu import Queue
-node=Node()
+
+
 
 class LinkedList:
 
@@ -10,7 +11,8 @@ class LinkedList:
     self.size = 0
   
    def addNode(self, data,weight):
-      new_node = node(data,weight)
+      node=Node(data,weight)
+      new_node = node
       new_node.next = self.head
       self.head = new_node
       self.size += 1
@@ -33,7 +35,7 @@ class LinkedList:
    def displayNodes(self):
     temp = self.head
     while temp:
-      print(temp.data, end=" -> ")
+      print(temp.user, end=" -> ")
       temp = temp.next
     print("None")
 
@@ -85,7 +87,7 @@ class Graph:                #the graph probably is spare that's why an adjacency
       print("Graph is empty!\n")
       return
     for vertex in self.adj_list:
-      print(vertex + ":", end=" ")
+      print(f"{vertex} :", end=" ")
       self.adj_list[vertex].displayNodes()
     print()
 
