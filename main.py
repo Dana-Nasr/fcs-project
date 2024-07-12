@@ -35,6 +35,7 @@ def main():
     graph.addFriendEdge(1, 2, 4)
     graph.addFriendEdge(1, 3, 2)
     graph.addFriendEdge(2, 4, 1)
+    graph.addFriendEdge(2, 6, 1)
     graph.addFollowEdge(3,2)
     graph.displayGraph()
     graph.deleteUser(5)
@@ -53,5 +54,6 @@ def main():
 
     print("DFS Traversal from sara:")
     graph.dfs(1)
-    graph.bfs(1)
+    print("BFS Traversal from heba:")
+    graph.bfs(3)
 main()
