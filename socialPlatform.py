@@ -109,10 +109,11 @@ class Graph:  # the graph probably is sparse that's why an adjacency list is use
             return
         visited = set()
         queue = Queue()
-        queue.inqueue(Node(start_vertex, 0))
+        node=Node(start_vertex,0)
+        queue.inqueue(node)
         while queue.head is not None:
             vertex_node = queue.dequeue()
-            vertex = vertex_node.user
+            vertex = vertex_node
             if vertex not in visited:
                 print("Visited:", vertex)
                 visited.add(vertex)
