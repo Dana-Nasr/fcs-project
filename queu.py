@@ -15,7 +15,7 @@ class Queue:
       self.tail = node
     else:
       self.tail.next = node
-      self.tail = node          #repositioning tail
+      self.tail = node          
 
  def dequeue(self):
         if self.head is None:
@@ -23,7 +23,7 @@ class Queue:
             return None
         removed_node = self.head
         self.head = self.head.next
-        if self.head is None:       #queue is empty now
+        if self.head is None:       
             self.tail = None
         return removed_node.user
  
