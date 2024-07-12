@@ -1,6 +1,6 @@
 from node import Node
 from stack import Stack
-from queue import Queue
+from queu import Queue
 from user import User  # Ensure User class is imported
 
 class LinkedList:

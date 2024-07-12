@@ -1,35 +1,37 @@
 class Queue:
-    def __init__(self):
-        self.head = None
-        self.tail = None
+  def __init__(self):
+    self.head = None
+    self.tail = None
+    self.size = 0
     
-    def getSize(self):
-        current = self.head
-        size = 0
-        while current is not None:
-            size += 1
-            current = current.next
-        return size
-    
-    def inqueue(self, node):
-        if self.head is None:
-            self.head = node
-            self.tail = node
-        else:
-            self.tail.next = node
-            self.tail = node
-    
-    def dequeue(self):
-        if self.head is None:
-            print("Queue is empty")
-            return None
-        removed_node = self.head
-        self.head = self.head.next
-        removed_node.next = None  
-        return removed_node
-    
-    def displayNodes(self):
-        current = self.head
-        while current is not None:
-            print(current.user.id)
-            current = current.next
+  def displayNodes(self):
+    current = self.head
+    while current != None:
+      print(current.data)
+      current = current.next
+
+  def inqueue(self, node):
+    if self.size == 0:  
+      self.head = node
+      self.tail = node
+    else:
+      self.tail.next = node
+      self.tail = node
+ 
+    self.size += 1
+   
+
+  def dequeue(self):
+    if self.size == 0:
+      print("\nYour Queue is empty! Enqueue first...\n")
+    elif self.size == 1:
+      current = self.head
+      self.head = None
+      self.tail = None
+      self.size -= 1 
+    else:
+      current = self.head
+      self.head = self.head.next
+      current.next = None
+      self.size -= 1
+    return current

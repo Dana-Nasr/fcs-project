@@ -53,4 +53,5 @@ def main():
 
     print("DFS Traversal from sara:")
     graph.dfs(1)
+    graph.bfs(1)
 main()
