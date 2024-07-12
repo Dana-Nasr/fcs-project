@@ -47,6 +47,8 @@ def main():
 
     graph.checkFriendship(4,1)
     graph.checkFriendship(2,1)
+    graph.checkFollwers(3,2)
+    graph.checkFollwers(2,3)
     graph.recommendFriends(1,user1.getName())
 
     print("DFS Traversal from sara:")

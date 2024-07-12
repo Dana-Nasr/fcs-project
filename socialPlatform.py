@@ -141,16 +141,30 @@ class Graph:
             if current.user.id == vertex2:
                 weight = current.weight
                 if weight <= 2:
-                    print(f"{self.users[vertex1].name} and {self.users[vertex2].name} are not close friends. Weight: {weight}")
+                    print(f"{self.users[vertex1].name} and {self.users[vertex2].name} are not close friends. degree of freindship: {weight}")
                 else:
-                    print(f"{self.users[vertex1].name} and {self.users[vertex2].name} are close friends. Weight: {weight}")
+                    print(f"{self.users[vertex1].name} and {self.users[vertex2].name} are close friends. degree of freindship: {weight}")
                 return
             current = current.next
 
         print(f"{self.users[vertex1].name} and {self.users[vertex2].name} are not friends.\n")
     
        
+    def checkFollwers(self, vertex1, vertex2):
+        if vertex1 not in self.adj_list or vertex2 not in self.adj_list:
+            print(f"One or both users do not exist in the graph!\n")
+            return
 
+        current = self.adj_list[vertex1].head
+        while current:
+            if current.user.id == vertex2:
+                weight = current.weight
+                if weight == 0:
+                    print(f"{self.users[vertex1].name} follows {self.users[vertex2].name} \n")
+                    return     
+             
+            current = current.next
+        print(f"{self.users[vertex1].name} do not follow {self.users[vertex2].name} \n")
     def recommendFriends(self, user_id,name):
         if user_id not in self.users:
             print(f"User ID {user_id} does not exist!\n")
