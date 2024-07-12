@@ -43,3 +43,5 @@ class User:
 
     def getSubjects(self):
         return self.subjects
+    def getName(self):
+        return self.name
