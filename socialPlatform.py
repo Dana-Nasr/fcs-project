@@ -36,44 +36,59 @@ class LinkedList:
             temp = temp.next
         print("None")
 
-class Graph:  # the graph probably is sparse that's why an adjacency list is used
+class Graph:
     def __init__(self):
         self.adj_list = {}
 
     def addVertex(self, vertex):
         if vertex not in self.adj_list:
-            self.adj_list[vertex] = LinkedList()  # add a node to the linked list
-            print("Vertex", vertex, "has been added!\n")
+            self.adj_list[vertex] = LinkedList()  
+            print(f"Vertex {vertex} has been added!\n")
         else:
-            print("Vertex", vertex, "already exists!\n")
+            print(f"Vertex {vertex} already exists!\n")
 
-    def addFriendEdge(self, vertex1, vertex2, weight):
-        if vertex1 in self.adj_list and vertex2 in self.adj_list:  # undirected means friends weight to show how much they are friends
+    def addUser(self, user_id, name, subjects=None, topics=None):
+        if user_id in self.adj_list:
+            print(f"User with ID {user_id} already exists in the graph!\n")
+            return
+        
+        new_node = Node(user_id)   #user node
+        new_node.name = name
+        new_node.subjects = subjects if subjects else []
+        new_node.topics = topics if topics else {}
+        
+        self.adj_list[user_id] = LinkedList()       #add to list 
+        self.adj_list[user_id].addNode(new_node)
+        
+        print(f"User {name} with ID {user_id} has been added to the graph!\n")
+
+    def addFriendEdge(self, vertex1, vertex2, weight=0):                             #not directed indicates friendship
+        if vertex1 in self.adj_list and vertex2 in self.adj_list:
             self.adj_list[vertex1].addNode(vertex2, weight)
             self.adj_list[vertex2].addNode(vertex1, weight)
         else:
             if vertex1 not in self.adj_list:
-                print("Invalid vertex", vertex1, "\n")
+                print(f"Invalid vertex {vertex1}!\n")
             if vertex2 not in self.adj_list:
-                print("Invalid vertex", vertex2, "\n")
+                print(f"Invalid vertex {vertex2}!\n")
 
-    def addFollowEdge(self, vertex1, vertex2, weight=0):
-        if vertex1 in self.adj_list and vertex2 in self.adj_list:  # directed to serve as follow weight=0
+    def addFollowEdge(self, vertex1, vertex2, weight=0):                #directed indicates follow
+        if vertex1 in self.adj_list and vertex2 in self.adj_list:
             self.adj_list[vertex1].addNode(vertex2, weight)
         else:
             if vertex1 not in self.adj_list:
-                print("Invalid vertex", vertex1, "\n")
+                print(f"Invalid vertex {vertex1}!\n")
             if vertex2 not in self.adj_list:
-                print("Invalid vertex", vertex2, "\n")
+                print(f"Invalid vertex {vertex2}!\n")
 
     def deleteVertex(self, vertex):
         if vertex not in self.adj_list:
-            print("Vertex", vertex, "does not exist!\n")
+            print(f"Vertex {vertex} does not exist!\n")
             return
         del self.adj_list[vertex]
         for v in self.adj_list:
-            self.adj_list[v].removeNode(vertex)  # deletes any connection (edge) to the vertex
-        print("Vertex", vertex, "has been deleted!\n")
+            self.adj_list[v].removeNode(vertex)
+        print(f"Vertex {vertex} has been deleted!\n")
 
     def displayGraph(self):
         if not self.adj_list:
@@ -88,37 +103,44 @@ class Graph:  # the graph probably is sparse that's why an adjacency list is use
         if start_vertex not in self.adj_list:
             print(f"Start vertex {start_vertex} not found in the graph")
             return
-        visited = set()  # do not need to be ordered
+        
+        visited = set()
         stack = Stack()
-        stack.push(Node(start_vertex, 0))
+        stack.push(Node(start_vertex))
+        
         while not stack.isEmpty():
             vertex_node = stack.pop()
             vertex = vertex_node.user
+            
             if vertex not in visited:
-                print("Visited:", vertex)
+                print(f"Visited: {vertex}")
                 visited.add(vertex)
                 current = self.adj_list[vertex].head
+                
                 while current:
                     if current.user not in visited:
-                        stack.push(Node(current.user, 0))
+                        stack.push(Node(current.user))
                     current = current.next
 
     def bfs(self, start_vertex):
         if start_vertex not in self.adj_list:
             print(f"Start vertex {start_vertex} not found in the graph")
             return
+        
         visited = set()
         queue = Queue()
-        node=Node(start_vertex,0)
-        queue.inqueue(node)
+        queue.inqueue(Node(start_vertex))
+        
         while queue.head is not None:
             vertex_node = queue.dequeue()
-            vertex = vertex_node
+            vertex = vertex_node.user
+            
             if vertex not in visited:
-                print("Visited:", vertex)
+                print(f"Visited: {vertex}")
                 visited.add(vertex)
                 current = self.adj_list[vertex].head
+                
                 while current:
                     if current.user not in visited:
-                        queue.inqueue(Node(current.user, 0))
+                        queue.inqueue(Node(current.user))
                     current = current.next
