@@ -59,15 +59,17 @@ class Graph:
             node2 = Node(self.users[user2_id], weight)
             self.adj_list[user1_id].addNode(node2)
             self.adj_list[user2_id].addNode(node1)
+            print(f"{self.users[user1_id].name} and {self.users[user2_id].name} are now freinds")
         else:
             print(f"Invalid user IDs {user1_id} and {user2_id}!\n")
 
-    def addFollowEdge(self, follower_id, followee_id, weight=0):
-        if follower_id in self.adj_list and followee_id in self.adj_list:
-            node = Node(self.users[followee_id], weight)
-            self.adj_list[follower_id].addNode(node)
+    def addFollowEdge(self, user1_id, user2_id, weight=0):
+        if user1_id in self.adj_list and user2_id in self.adj_list:
+            node = Node(self.users[user2_id], weight)
+            self.adj_list[user1_id].addNode(node)
+            print(f"{self.users[user1_id].name} is following {self.users[user2_id].name}")
         else:
-            print(f"Invalid user IDs {follower_id} and {followee_id}!\n")
+            print(f"Invalid user IDs {user1_id} and {user2_id}!\n")
 
     def deleteUser(self, user_id):
         if user_id not in self.adj_list:
@@ -129,7 +131,27 @@ class Graph:
                         queue.inqueue(Node(current.user))
                     current = current.next
 
-    def recommendFriends(self, user_id):
+    def checkFriendship(self, vertex1, vertex2):
+        if vertex1 not in self.adj_list or vertex2 not in self.adj_list:
+            print(f"One or both users do not exist in the graph!\n")
+            return
+
+        current = self.adj_list[vertex1].head
+        while current:
+            if current.user.id == vertex2:
+                weight = current.weight
+                if weight <= 2:
+                    print(f"{self.users[vertex1].name} and {self.users[vertex2].name} are not close friends. Weight: {weight}")
+                else:
+                    print(f"{self.users[vertex1].name} and {self.users[vertex2].name} are close friends. Weight: {weight}")
+                return
+            current = current.next
+
+        print(f"{self.users[vertex1].name} and {self.users[vertex2].name} are not friends.\n")
+    
+       
+
+    def recommendFriends(self, user_id,name):
         if user_id not in self.users:
             print(f"User ID {user_id} does not exist!\n")
             return
@@ -156,7 +178,7 @@ class Graph:
 
        
 
-        print(f"Friend recommendations for user {user_id}:")
+        print(f"Friend recommendations for user {name}:")
         for count, friend_id in recommendations:
             print(f"User ID: {friend_id}, Name: {self.users[friend_id].name}, Common Interests: {count}")
 
