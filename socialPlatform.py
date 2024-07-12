@@ -50,16 +50,12 @@ class Graph:
             print(f"User with ID {user_id} already exists in the graph!\n")
             return
         
-        # Create a new Node for the user
-        new_node = Node(user_id, name)  # Initialize Node with ID and name
-        
-        # Assign optional attributes if provided
+        new_node = Node(user_id, name)  # creating a user
         if subjects:
             new_node.subjects = subjects
         if topics:
             new_node.topics = topics
-        
-        # Add the new Node to the adjacency list
+      
         self.adj_list[user_id] = LinkedList()
         self.adj_list[user_id].addNode(new_node)
         
@@ -107,18 +103,18 @@ class Graph:
         
         visited = set()
         stack = Stack()
-        stack.push(Node(start_vertex, 0))  # Push the start vertex as a Node object
+        stack.push(Node(start_vertex, 0))  
         
         while not stack.isEmpty():
             vertex_node = stack.pop()
-            vertex = vertex_node.user  # Get the vertex identifier from the Node object
+            vertex = vertex_node.user 
             if vertex not in visited:
                 print("Visited:", vertex)
                 visited.add(vertex)
                 current = self.adj_list[vertex].head
                 while current:
                     if current.user not in visited:
-                        stack.push(Node(current.user, 0))  # Push adjacent vertices as Node objects
+                        stack.push(Node(current.user, 0))  #push the adj 
                     current = current.next
 
     def bfs(self, start_vertex):
@@ -128,18 +124,15 @@ class Graph:
         
         visited = set()
         queue = Queue()
-        queue.inqueue(Node(start_vertex))
+        queue.inqueue(start_vertex)  
         
         while queue.head is not None:
-            vertex_node = queue.dequeue()
-            vertex = vertex_node.user
-            
+            vertex = queue.dequeue()
             if vertex not in visited:
-                print(f"Visited: {vertex}")
+                print("Visited:", vertex)
                 visited.add(vertex)
                 current = self.adj_list[vertex].head
-                
                 while current:
                     if current.user not in visited:
-                        queue.inqueue(Node(current.user))
+                        queue.inqueue(current.user)  # inqueue adj
                     current = current.next
